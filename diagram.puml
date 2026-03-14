@@ -1,0 +1,13 @@
+
+@startuml
+
+
+class CustomerController{
+    -CatalogService catalogService
+    +getCatalog()
+}
+
+CustomerController --> CatalogService
+CatalogService --|> CatalogRepository
+CatalogRepository --|> Database
+@enduml

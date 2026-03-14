@@ -1,0 +1,20 @@
+@startuml
+
+package Fakestore{
+    [Users]
+    [Catalog]
+    [Cart]
+
+    [Orders]
+    [Payment]
+    [Shipping]
+    [MQ]
+
+    [Orders] --> [MQ] : ORDER_CREATED, \n ORDER_MODIFIED, \n ORDER_CANCELLED
+    [MQ] --> [Payment] : ORDER_CREATED, \n ORDER_MODIFIED, \n ORDER_CANCELLED
+    [Payment] --> [MQ] : PAYMENT_RECEIVED, \n PAYMENT_FAILED
+    [MQ] --> [Orders] : PAYMENT_FAILED
+    [MQ] --> [Shipping] : PAYMENT_RECEIVED
+    [Shipping] --> [MQ] : ORDER_SHIPPED
+}
+@enduml
